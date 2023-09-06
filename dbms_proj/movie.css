@@ -1,0 +1,42 @@
+body {
+    background-image: url("1.jpg");
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    margin-top: 0;
+}
+
+h1 {
+    margin: 20px 0;
+    color:white;
+    text-align: center;
+}
+
+#recommendation-container {
+    margin-top: 30px;
+}
+
+#movie-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    
+}
+
+#button-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+    padding: 20px; 
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px; 
+    cursor: pointer;
+    width: 100px;
+}

@@ -1,0 +1,16 @@
+DELIMITER $$
+CREATE TRIGGER `UpdateGenrePopularity` AFTER INSERT ON `ratings` FOR EACH ROW BEGIN
+    -- Check if the inserted rating is greater than 3
+    IF NEW.rating > 3 THEN
+        -- Increment the popularity of the genre associated with the rated movie
+        UPDATE genres
+        SET popularity = popularity + 1
+        WHERE genre_id = (
+            SELECT genre_id
+            FROM movies
+            WHERE movie_id = NEW.movie_id
+        );
+    END IF;
+END
+$$
+DELIMITER ;

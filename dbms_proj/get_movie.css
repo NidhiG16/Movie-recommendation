@@ -1,0 +1,20 @@
+body {
+  background-image: url("9.jpg");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  color:white;
+  font-size:medium;
+}

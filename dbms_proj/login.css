@@ -1,0 +1,16 @@
+body{
+  background-image: url("2.jpeg");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+}
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.grid{
+  display: grid;
+  grid-template-columns: 1fr;
+}

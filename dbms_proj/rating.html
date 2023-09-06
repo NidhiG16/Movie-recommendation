@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="http://localhost//dbms_proj//">
+    <title>Rate Movies</title>
+    <link rel="stylesheet" type="text/css" href="rating.css">
+</head>
+<body>
+    <div class="form">
+    <form action="rating.php" method="post">
+        <h1>Rate Genre</h1>
+        <div class="grid">
+        <input type="hidden" id="user_id" name="user_id" value="123"> 
+        
+        
+        <div class="movie-rating">
+            <label for="rating_1">Genre:Sci-Fi</label>
+            <input type="hidden" name="movie_id[]" value="1"><br>
+            <label for="rating_1">Rating:</label>
+            <input type="number" id="rating_1" name="rating[]" min="1" max="5" required>
+        </div>
+        
+        
+        <div class="movie-rating">
+            <label for="rating_2">Genre:Crime</label>
+            <input type="hidden" name="movie_id[]" value="2"><br>
+            <label for="rating_2">Rating:</label>
+            <input type="number" id="rating_2" name="rating[]" min="1" max="5" required>
+        </div>
+	
+        <div class="movie-rating">
+            <label for="rating_2">Genre:Action</label>
+            <input type="hidden" name="movie_id[]" value="3"><br>
+            <label for="rating_2">Rating:</label>
+            <input type="number" id="rating_2" name="rating[]" min="1" max="5" required>
+        </div>
+	
+        <div class="movie-rating">
+            <label for="rating_2">Genre:Drama</label>
+            <input type="hidden" name="movie_id[]" value="4"><br>
+            <label for="rating_2">Rating:</label>
+            <input type="number" id="rating_2" name="rating[]" min="1" max="5" required>
+        </div>
+	
+        <div class="movie-rating">
+            <label for="rating_2">Genre:Comedy</label>
+            <input type="hidden" name="movie_id[]" value="8"><br>
+            <label for="rating_2">Rating:</label>
+            <input type="number" id="rating_2" name="rating[]" min="1" max="5" required>
+        </div>
+        </div>
+        
+        
+        <input type="submit" value="Submit Ratings">
+    </form>
+    </div>
+</body>
+</html>

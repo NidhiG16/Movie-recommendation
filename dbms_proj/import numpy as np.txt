@@ -1,0 +1,106 @@
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Sample data for demonstration purposes
+fertilizer_amounts = np.array([2, 4, 6, 8, 10])
+crop_yield = np.array([10, 20, 30, 40, 50])
+
+# Reshape the data for sklearn
+X = fertilizer_amounts.reshape(-1, 1)
+y = crop_yield
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create and fit the KNN regression model
+knn_model = KNeighborsRegressor(n_neighbors=3)
+knn_model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = knn_model.predict(X_test)
+
+# Evaluate the model
+mse = mean_squared_error(y_test, y_pred)
+r2 = r2_score(y_test, y_pred)
+
+print("Mean Squared Error:", mse)
+print("R-squared:", r2)
+
+
+
+
+def bayes_theorem(prior_probs, conditional_probs, evidence):
+    posterior_probs = {}
+    evidence_prob = sum(prior_probs[dept] * conditional_probs[dept] for dept in prior_probs)
+    
+    for dept in prior_probs:
+        posterior_probs[dept] = (prior_probs[dept] * conditional_probs[dept]) / evidence_prob
+    
+    return posterior_probs
+
+# Given probabilities
+prior_probs = {'IT': 0.75, 'CSE': 0.85, 'AIML': 0.9}
+conditional_probs = {'IT': 0.05, 'CSE': 0.03, 'AIML': 0.02}
+
+# Evidence that the student is a slow learner
+evidence = 0.05
+
+# Applying Bayes' Theorem to calculate posterior probabilities
+posterior_probs = bayes_theorem(prior_probs, conditional_probs, evidence)
+
+# Print the results
+for dept, prob in posterior_probs.items():
+    print(f"The probability that the student is from the department {dept} is {prob:.2f}")
+
+
+
+
+
+
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+# Load the credit information from a CSV file
+credit_data = pd.read_csv('insurance.csv')
+
+# Extract the features and labels from the data
+X = credit_data[['Credit_Score', 'Income']].values
+y = credit_data['PaymentAbility'].values
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, 
+                                                    random_state=42)
+
+# Create a decision tree classifier
+clf = DecisionTreeClassifier()
+
+# Train the classifier using the credit information
+clf.fit(X_train, y_train)
+
+# Make predictions on the test set
+predictions = clf.predict(X_test)
+
+# Calculate accuracy
+accuracy = accuracy_score(y_test, predictions)
+print(f"Accuracy: {accuracy:.2f}")
+
+
+# New credit information to predict
+new_credit_info = [[650, 40000]]
+
+# Predict the ability to pay the insurance monthly
+prediction = clf.predict(new_credit_info)
+
+# Print the prediction
+if prediction[0] == 1:
+    print("The person is likely to be able to pay the insurance monthly.")
+else:
+    print("The person is unlikely to be able to pay the insurance monthly.")
+
+
+
+

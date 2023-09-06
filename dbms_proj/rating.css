@@ -1,0 +1,13 @@
+body{
+  background-image: url("4.jpeg");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+}
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+

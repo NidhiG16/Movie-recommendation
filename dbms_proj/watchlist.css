@@ -1,0 +1,33 @@
+body {
+  background-image: url("8.jpg");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  height: 100vh;
+}
+
+.watchlist{
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-top: 0;
+  font-size: large;
+  margin-top: 50px;
+  color:black;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color:black;
+}
+button{
+  height: 5vh;
+  margin-top: 100px; 
+  cursor: pointer;
+  width: 300px;
+}

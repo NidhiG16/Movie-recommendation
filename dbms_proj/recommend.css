@@ -1,0 +1,40 @@
+body {
+  background-image: url("7.jpeg");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+}
+
+#recommendation-list {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-top: 0;
+  font-size: larger;
+  color:white;
+}
+
+h1 {
+ 
+  margin-bottom: 10px;
+}
+button{
+  height: 5vh;
+  margin-bottom: 10px; 
+  cursor: pointer;
+  width: 200px;
+}

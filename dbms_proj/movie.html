@@ -1,0 +1,43 @@
+<html>
+<head>
+   <base href="http://localhost//dbms_proj//">
+    <title>Movie Recommendation System</title>
+    <link rel="stylesheet" type="text/css" href="movie.css">
+</head>
+<body>
+    <h1>Movie Recommendation System</h1>
+	<div class="container">
+    <div id="recommendation-container">
+        <ul id="movie-list">
+        </ul>
+	<button id="review" onclick="getReview()">Register</button><br>
+	<button id="rating" onclick="getRating()">Rating</button><br>
+	<button id="login" onclick="login()">LogIn</button><br>
+	<button id="popular" onclick="popular()">Popular Genre</button><br>
+	<button id="watchlist" onclick="watchlist()">Watchlist</button><br>
+	<button id="movie-deets" onclick="deets()">Movies</button>
+    </div>
+	</div>
+    <script>
+	function getReview(){
+	   window.location.href="login.html";
+	}
+	function getRating(){
+	   window.location.href="rating.html";
+	}
+	function login(){
+	   window.location.href="log.html";
+	}
+	function popular(){
+	   window.location.href="genre.html";
+	}
+	function watchlist(){
+	   window.location.href="watchlist.php";
+	}
+	function deets(){
+	   window.location.href="movie_deets.html";
+	}
+   
+    </script>
+</body>
+</html>

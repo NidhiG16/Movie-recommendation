@@ -1,0 +1,19 @@
+body{
+  background-image: url("5.jpeg");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+}
+#popularity-list{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  margin-top: 0;
+  font-size: large;
+}
+h1{
+ justify-content: center;
+ display: flex;
+ margin-bottom: 10px;
+}

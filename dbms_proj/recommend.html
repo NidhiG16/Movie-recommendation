@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <base href="http://localhost//dbms_proj//">
+    <title>Your Movie Recommendations</title>
+    <link rel="stylesheet" type="text/css" href="recommend.css">
+</head>
+<body>
+    
+    <h2>Your Movie Recommendations</h2>
+    <div id="recommendation-list">
+    </div>
+    <div class="form">
+        <button onclick="getRecommendations()">Get Recommendations</button>
+        <button onclick="watchlist()">Create a watchlist</button>
+    </div>
+    <script>
+        function getRecommendations() {
+            const userId = localStorage.getItem("user_id");
+
+            fetch(`recommend.php?user_id=${userId}`)
+                .then(response => response.json())
+                .then(movieDetails => {
+                    const movieList = document.getElementById("recommendation-list");
+                    movieList.innerHTML = "";
+
+                    movieDetails.forEach(movie => {
+                        const movieInfo = document.createElement("div");
+                        movieInfo.textContent = `Title: ${movie.title}, Genre: ${movie.genre_name}`;
+                        movieList.appendChild(movieInfo);
+                    });
+                })
+                .catch(error => console.error('Error fetching recommendations:', error));
+        }
+
+        function watchlist(){
+           window.location.href="watchlist.php";
+        }
+    </script>
+</body>
+</html>

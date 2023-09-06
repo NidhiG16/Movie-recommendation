@@ -1,0 +1,153 @@
+CREATE TABLE `genres` (
+  `genre_id` int(11) NOT NULL,
+  `genre_name` varchar(50) NOT NULL,
+  `popularity` int(11) DEFAULT NULL,
+   primary key(genre_id)
+) 
+CREATE TABLE `movies` (
+  `movie_id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `release_date` date DEFAULT NULL,
+  `director_id` int(11) DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `genre_id` int(11) DEFAULT NULL,
+   primary key(`movie_id`),
+   constraint fk1 foreign key(`genre_id`) references genres(`genre_id`)
+) 
+
+CREATE TABLE `ratings` (
+  `rating_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `movie_id` int(11) DEFAULT NULL,
+  `rating` decimal(3,1) DEFAULT NULL,
+  `genre_id` int(11) DEFAULT NULL,
+   primary key(`rating_id`),
+   constraint fk2 foreign key(`user_id`) references users(`user_id`)
+   constraint fk3 foreign key(`movie_id`) references movies(`movie_id`)
+   constraint fk4 foreign key(`genre_id`) references genres(`genre_id`)
+) 
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+   primary key(`user_id`)
+) 
+
+
+CREATE TABLE `watchlist` (
+  `watchlist_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `movie_id` int(11) DEFAULT NULL,
+   primary key(`watchlist_id`),
+   constraint fk5 foreign key(`user_id`) references users(`user_id`)
+   constraint fk6 foreign key(`movie_id`) references movies(`movie_id`)
+) 
+
+CREATE TABLE `directors` (
+  `director_id` int(11) NOT NULL,
+  `director_name` varchar(100) NOT NULL,
+   primary key(`director_id`)
+)
+
+
+
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`` PROCEDURE `DisplayMovieDetails` (IN `movie_title` VARCHAR(255))   BEGIN
+    DECLARE movie_genre VARCHAR(255);
+    DECLARE movie_description TEXT;
+    DECLARE director_name VARCHAR(255);
+    
+    -- Get movie genre and description based on the provided movie title
+    SELECT g.genre_name, m.description, d.director_name
+    INTO movie_genre, movie_description, director_name
+    FROM movies m
+    JOIN genres g ON m.genre_id = g.genre_id
+    JOIN directors d ON m.director_id = d.director_id
+    WHERE m.title = movie_title
+    LIMIT 1;
+    
+    -- Display movie and director details
+    SELECT 'Title: ' AS 'movie', movie_title AS 'mov'
+    UNION ALL
+    SELECT 'Genre: ', movie_genre
+    UNION ALL
+    SELECT 'Description: ', movie_description
+    UNION ALL
+    SELECT 'Director: ', director_name;
+END$$
+
+DELIMITER ;
+
+
+<?php
+session_start();
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "movierecommendation";
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+$check_query = "SELECT user_id FROM users WHERE username = ? AND password = ?";
+$stmt = $conn->prepare($check_query);
+$stmt->bind_param("ss", $username, $password);
+$stmt->execute();
+$result = $stmt->get_result();
+
+
+if ($result->num_rows === 1) {
+    
+    $_SESSION['user_id'] = $result->fetch_assoc()['user_id'];
+    header("Location: rating.html"); 
+} else {
+
+    echo "Invalid username or password.";
+}
+
+$stmt->close();
+$conn->close();
+?>
+
+
+
+DELIMITER $$
+
+CREATE PROCEDURE DisplayMovieDetails(IN movie_title VARCHAR(255))
+BEGIN
+    DECLARE movie_genre VARCHAR(255);
+    DECLARE movie_description TEXT;
+    DECLARE director_name VARCHAR(255);
+    
+    -- Get movie genre and description based on the provided movie title
+    SELECT g.genre_name, m.description, d.director_name
+    INTO movie_genre, movie_description, director_name
+    FROM movies m
+    JOIN genres g ON m.genre_id = g.genre_id
+    JOIN directors d ON m.director_id = d.director_id
+    WHERE m.title = movie_title
+    LIMIT 1;
+    
+    -- Display movie and director details
+    SELECT 'Title: ' AS 'movie', movie_title AS 'mov'
+    UNION ALL
+    SELECT 'Genre: ', movie_genre
+    UNION ALL
+    SELECT 'Description: ', movie_description
+    UNION ALL
+    SELECT 'Director: ', director_name;
+END$$
+
+DELIMITER ;
+
